@@ -5,6 +5,7 @@
 *.exe
 *.pdb
 *.cache
-*.cs
 *.txt
 *.csproj
+*/obj/Debug/*
+*/Properties/AssemblyInfo.cs
