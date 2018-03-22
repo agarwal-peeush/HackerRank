@@ -1,0 +1,10 @@
+*.suo
+*.ide
+*.sln
+*.config
+*.exe
+*.pdb
+*.cache
+*.cs
+*.txt
+*.csproj
