@@ -11,10 +11,15 @@ namespace BeautifulStrings
         static void Main(string[] args)
         {
             /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution */
-            //var str = Console.ReadLine().Split(' ').First();
+            var str = Console.ReadLine().Split(' ').First();
             //UnitTest(); return;
 
-            var str = new String('g', 1000000);
+            //var str = new String('g', 1000000);
+            //var str = new String('g', 2000);
+
+            if (str.Length < 3 || str.Length > 1000000)
+                throw new Exception("String length is not in range");
+
             Console.WriteLine(BeautifulStringsCount(str));
         }
 
@@ -76,13 +81,13 @@ namespace BeautifulStrings
             return beautifulStrings.Count;
         }
 
-        static void BeautifulStrings(string str, int index1, int index2, HashSet<string> strings)
-        {
-            if (index1 >= index2)
-                return;
+        //static void BeautifulStrings(string str, int index1, int index2, HashSet<string> strings)
+        //{
+        //    if (index1 >= index2)
+        //        return;
 
-            var sub = TrimCharacters(str, index1, index2);
-            strings.Add(sub);
-        }
+        //    var sub = TrimCharacters(str, index1, index2);
+        //    strings.Add(sub);
+        //}
     }
 }
