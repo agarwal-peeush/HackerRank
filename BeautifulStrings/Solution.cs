@@ -14,11 +14,13 @@ namespace BeautifulStrings
             var str = Console.ReadLine().Split(' ').First();
             //UnitTest(); return;
 
-            //var str = new String('g', 1000000);
-            //var str = new String('g', 2000);
+            //str = new String('g', 1000000);
+            //str = new String('g', 2000);
 
             if (str.Length < 3 || str.Length > 1000000)
                 throw new Exception("String length is not in range");
+
+            Bstrings(str); return;
 
             Console.WriteLine(BeautifulStringsCount(str));
         }
@@ -57,7 +59,7 @@ namespace BeautifulStrings
             //    endIndex = str.Length - 2;
 
             return str.Substring(startIndex, (index1 - startIndex))
-                + str.Substring(index1 + 1, (index2 - index1 -1))
+                + str.Substring(index1 + 1, (index2 - index1 - 1))
                 + str.Substring(index2 + 1);
         }
 
@@ -89,5 +91,51 @@ namespace BeautifulStrings
         //    var sub = TrimCharacters(str, index1, index2);
         //    strings.Add(sub);
         //}
+
+
+
+
+        static void Bstrings(string str)
+        {
+            int N = 1000500;
+            int[] p = new int[N];
+            char[] c = new char[N];
+            long[,] f = new long[3, N];
+
+            int idx = 0;
+            int n = str.Length;
+            for (int i = 0; i < n; ++i)
+            {
+                if (i + 1 < n && str.ElementAt(i) == str.ElementAt(i + 1))
+                    p[1 + idx]++;
+                else
+                {
+                    c[1 + idx] = str.ElementAt(i);
+                    p[1 + idx++]++;
+                }
+            }
+
+            n = idx;
+            f[0, 0] = 1L;
+            for (int i = 0; i < n; ++i)
+            {
+                f[0, i + 1] += f[0, i];
+                f[1, i + 1] += f[1, i];
+                f[2, i + 1] += f[2, i];
+                if (p[i + 1] >= 2)
+                    f[2, i + 1] += f[0, i];
+
+                if (p[i + 1] >= 1)
+                {
+                    if (i + 2 <= n && p[i + 1] == 1 && c[i] == c[i + 2])
+                        f[2, i + 2] -= 1;
+
+                    f[1, i + 1] += f[0, i];
+                    f[2, i + 1] += f[1, i];
+                }
+            }
+
+            Console.WriteLine(f[2, n]);
+        }
     }
 }
